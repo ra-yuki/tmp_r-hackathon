@@ -11,6 +11,22 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'WelcomeController@index')->name('welcome.index');
+
+// Login/Registration Handling
+Route::get('signup', 'Auth\RegisterController@showRegistrationForm')->name('signup.get');
+Route::post('signup', 'Auth\RegisterController@register')->name('signup.post');
+
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login')->name('login.post');
+Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('mypage', 'MypageController', ['only' => ['index']]);
+    Route::resource('events', 'EventsController', ['except' => ['index']]);
+    //route for friends and group
+    Route::resource('friends', 'FriendsController', ['only' => ['show','store','delete','index']]);
+    Route::resource('user', 'UserController');
 });
+ 
+
