@@ -10,13 +10,13 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
    <!-- Latest compiled and minified CSS -->
-<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 <!-- Optional theme -->
-<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
 <!-- Latest compiled and minified JavaScript -->
-<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 
     <title>{{ config('app.name', 'Laravel') }}</title>
@@ -38,18 +38,34 @@
                         
                     @if (Auth::check())
                         
-                <a class="navbar-left" href="/user" id="toop">Medium-Rare </a>
+                <a class="navbar-left" href="/mypage" id="toop" class="bt">Medium-Rare </a>
                 
                     @else
-                         <a class="navbar-left" href="/" id="toop">Medium Rare </a>
-             
+                        
                     @endif
+            </div>    
+           <div id="topbar">
+                    @if (Auth::check())
+                        
+                <a class="navbar-left" href="/user" id="toop">Search </a>
                 
-       
-
+                    @else
+                        
+                    @endif
+ 
         <main class="py-4">
             @yield('content')
         </main>
     </div>
+    
+                     @if (Auth::check())
+                        
+                 <a href="{{ route('logout.get') }}" class="bt"><div id="a">Log out</div></a>
+                
+                    @else
+                        
+                    @endif
+     
+             @include('commons.footer')
 </body>
 </html>
