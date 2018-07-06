@@ -38,18 +38,34 @@
                         
                     @if (Auth::check())
                         
-                <a class="navbar-left" href="/user" id="toop">Medium-Rare </a>
+                <a class="navbar-left" href="/mypage" id="toop" class="bt">Medium-Rare </a>
                 
                     @else
-                         <a class="navbar-left" href="/" id="toop">Medium Rare </a>
-             
+                        
                     @endif
+            </div>    
+           <div id="topbar">
+                    @if (Auth::check())
+                        
+                <a class="navbar-left" href="/user" id="toop">Search </a>
                 
-       
-
+                    @else
+                        
+                    @endif
+ 
         <main class="py-4">
             @yield('content')
         </main>
     </div>
+    
+                     @if (Auth::check())
+                        
+                 <a href="{{ route('logout.get') }}" class="bt"><div id="a">Log out</div></a>
+                
+                    @else
+                        
+                    @endif
+     
+             @include('commons.footer')
 </body>
 </html>
