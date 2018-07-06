@@ -7,17 +7,23 @@ use Illuminate\Http\Request;
 class FriendsController extends Controller
 {
     function index(){
-        $users =Group::All;
+        $userinst= new \App\User;
+        $users = $userinst::all();
         
         return view('users.friends', [
-            'users' => $users,
+            'friends' => $users,
         ]);
       
     }
     
-    function show(){
-        return view('users.friends', [
-            'users' => $users,
+    function show(Request $request){
+        $friendId=$request->id;
+        $userinst= new \App\User;
+        $user = $userinst::find($friendId);
+        
+        
+        return view('users.friend_detail', [
+            'friend' => $user,
         ]);
     }
     
