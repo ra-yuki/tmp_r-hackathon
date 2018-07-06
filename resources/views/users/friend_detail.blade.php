@@ -5,14 +5,18 @@
         <aside class="col-xs-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">{{ $group->name }}</h3>
+                    <h3 class="panel-title">{{ $user->name }}</h3>
                 </div>
                 <div class="panel-body">
-                    @include('users.friends', ['users' => $groups])
+                    <img class="media-object img-rounded img-responsive" src="{{ Gravatar::src($user->email, 500) }}" alt="icon">
                 </div>
             </div>
+            
         </aside>
-       
-        </div>
+        
+            
+            
+           
+
     </div>
 @endsection

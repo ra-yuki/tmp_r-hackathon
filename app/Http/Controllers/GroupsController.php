@@ -7,9 +7,20 @@ use Illuminate\Http\Request;
 class GroupsController extends Controller
 {
    
-   public function show(){
-       
-   }
+   function index(){
+        $users =Group::All;
+        
+        return view('group.group', [
+            'groups' => $groups,
+        ]);
+      
+    }
+    
+    function show(){
+        return view('group.group_detail', [
+            'groups' => $groups,
+        ]);
+    }
    
    public function store(Request $request, $id)
     {
