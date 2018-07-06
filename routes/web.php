@@ -27,6 +27,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('friends', 'FriendsController', ['only' => ['show','store','delete','index']]);
     // Group表示はフレンドの方に含める
     Route::resource('groups', 'GroupsController', ['only' => ['show','store','delete']]);
+    // 友達検索機能のコントローラ
     Route::resource('user', 'UserController');
     Route::resource('makegroup', 'MakegroupController', ['only' => ['index','store', 'destroy']]);
 });
