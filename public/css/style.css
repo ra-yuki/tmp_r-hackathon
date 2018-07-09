@@ -44,7 +44,7 @@
 #a {
 display: inline-block;
 position: relative;
-width: 130px;
+/*width: 130px;*/
 padding: 0.5em;
 text-align: center;
 border-top: 2px solid white;
@@ -86,7 +86,7 @@ height: 100%;
 #b {
 display: inline-block;
 position: relative;
-width: 130px;
+/*width: 130px;*/
 padding: 0.5em;
 text-align: center;
 border-top: 2px solid white;
