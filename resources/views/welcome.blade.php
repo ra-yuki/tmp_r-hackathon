@@ -18,6 +18,7 @@
                 
                 <p class="p">Everyone's schedules on one calender</p>
 
+
                 <div class="row">
                     <div class="col-xs-1 col-xs-offset-4">
                         <a href="{{ route('signup.get') }}" id="a">Sign up</a>
@@ -26,6 +27,7 @@
                     <div class="col-xs-1 col-xs-offset-1">  
                         <a href="{{ route('login') }}" id="b">Log In</a>
                     </div>
+
                
             </div>
             
