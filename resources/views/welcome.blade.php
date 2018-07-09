@@ -22,6 +22,8 @@
                 
                 <a href="{{ route('login') }}" id="b">Log In</a>
                 
+                <a href="{{ route('friends') }}" id="b">Friends</a>
+                
 
   
                
