@@ -2,7 +2,7 @@
 
 <ul class="media-list">
 @foreach ($friends as $friend)
-    <!--<?php $user = $friend->user; ?>-->
+    <?php $user = $friend->user; ?>
     
            <div class="col-md-3 col-sm-4 col-xs-12">
                 <div class="panel panel-default">
@@ -12,7 +12,7 @@
                     <div>
                         @if (Auth::user()->id == $friend->user_id)
                              
-                            {!! Form::open(['route' => ['groups.destroy', $micropost->id], 'method' => 'delete']) !!}
+                            {!! Form::open(['route' => ['friends.destroy', $friend->id], 'method' => 'delete']) !!}
                                 {!! Form::submit('削除', ['class' => 'btn btn-danger btn-xs']) !!}
                             {!! Form::close() !!}
                           

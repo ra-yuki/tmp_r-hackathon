@@ -30,7 +30,7 @@ Route::group(['middleware' => ['auth']], function () {
     // 友達検索機能のコントローラ
     Route::resource('user', 'UserController');
     Route::resource('makegroup', 'MakegroupController', ['only' => ['index','store', 'destroy']]);
-    Route::get('add', 'AddfriendController@store')->name('add.get');
+    Route::get('add/{id}', 'AddFriendController@store')->name('add.get');
     
     
  
