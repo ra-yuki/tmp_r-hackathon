@@ -31,9 +31,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('user', 'UserController');
     Route::resource('makegroup', 'MakegroupController', ['only' => ['index','store', 'destroy']]);
     Route::get('add/{id}', 'AddFriendController@store')->name('add.get');
-    
-    
- 
+    Route::delete('unfriend/{id}','AddFriendController@destory')->name('unfriend');
 });
  
 
