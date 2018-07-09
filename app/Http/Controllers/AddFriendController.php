@@ -12,6 +12,12 @@ class AddFriendController extends Controller
         return redirect()->back();
  
     }
+    
+    public function destroy($id)
+    {
+        \Auth::user()->unfriend($id);
+        return redirect()->back();
+    }
 
    
 }
