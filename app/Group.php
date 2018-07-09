@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Group extends Model
 {
-    use Notifiable;
+    // use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -28,56 +28,7 @@ class Group extends Model
     
 
 
-    public function friends()
-    {
-        return $this->belongsToMany(Group::class, 'user_friend', 'userId', 'friendId')->withTimestamps();
-    }
-
-    // public function followers()
-    // {
-    //     return $this->belongsToMany(User::class, 'user_follow', 'follow_id', 'user_id')->withTimestamps();
-    // }
     
-    
-    public function friend($userId)
-    {
-    // confirm if already following
-        $exist = $this->is_friend($userId);
-    // confirming that it is not you
-        $its_me = $this->id == $userId;
-
-        if ($exist || $its_me) {
-        // do nothing if already following
-        return false;
-        } else {
-        // follow if not following
-        $this->friends()->attach($userId);
-        return true;
-        }
-    }
-
-    public function unfriend($userId)
-    {
-    // confirming if already following
-        $exist = $this->is_friend($userId);
-    // confirming that it is not you
-        $its_me = $this->id == $userId;
-
-
-        if ($exist && !$its_me) {
-        // stop following if following
-        $this->friends()->detach($userId);
-        return true;
-        } else {
-        // do nothing if not following
-        return false;
-        }
-    }
-
-
-    public function is_friend($userId) {
-        return $this->friends()->where('friendId', $userId)->exists();
-    }
     
     public function makegroups()
     {

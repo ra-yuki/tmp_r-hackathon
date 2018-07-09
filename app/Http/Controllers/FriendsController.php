@@ -3,21 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\User;
 class FriendsController extends Controller
 {
     function index(){
-        $users =Group::All;
+        
+        
+        $users = \Auth::user()->friends()->paginate(1000);
         
         return view('users.friends', [
-            'users' => $users,
+            'friends' => $users,
         ]);
       
     }
     
-    function show(){
-        return view('users.friends', [
-            'users' => $users,
+    function show($id){
+        // $friendId=$request->id;
+        // $userinst= new \App\User;
+        // $user = $userinst::find($friendId);
+        $user = User::find($id);
+        
+        return view('users.friend_detail', [
+            'friend' => $user,
         ]);
     }
     
