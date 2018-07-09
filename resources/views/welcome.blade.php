@@ -8,22 +8,24 @@
         <div class="cover-inner">
             <div class="cover-contents">
 
- <h1 class="ml1">
-    <span class="text-wrapper">
-    <span class="line line1"></span>
-    <span class="letters">CALENDAR</span>
-    <span class="line line2"></span>
-    </span>
-</h1>
-               <p class="p">Everyone's schedules on one calender</p>
+                <h1 class="ml1">
+                    <span class="text-wrapper">
+                    <span class="line line1"></span>
+                    <span class="letters">CALENDAR</span>
+                    <span class="line line2"></span>
+                    </span>
+                </h1>
                 
+                <p class="p">Everyone's schedules on one calender</p>
 
-                <a href="{{ route('signup.get') }}" id="a">Sign up</a>
-                
-                <a href="{{ route('login') }}" id="b">Log In</a>
-                
-
-  
+                <div class="row">
+                    <div class="col-xs-3 col-xs-offset-2">
+                        <a href="{{ route('signup.get') }}" id="a">Sign up</a>
+                    </div>
+                      
+                    <div class="col-xs-3 col-xs-offset-2">  
+                        <a href="{{ route('login') }}" id="b">Log In</a>
+                    </div>
                
             </div>
             
