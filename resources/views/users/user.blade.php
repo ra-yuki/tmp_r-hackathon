@@ -11,7 +11,7 @@
   <div class="form-group">
   <input type="text" name="userId" value="{{$userId}}" class="form-control" placeholder="Search New Friends">
   </div>
-  <input type="submit" value="Search" class="bt">
+  <input type="submit" value="Search" class="btn">
 </form>
 
 <!--↑↑ 検索フォーム ↑↑-->

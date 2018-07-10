@@ -83,7 +83,7 @@ class Group extends Model
         return false;
         }
     }
-   public function is_group($group_id) {
+   public function is_group($id) {
     return $this->groups()->where('groupId', $group_id)->exists();
     }
 

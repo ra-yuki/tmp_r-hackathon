@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 
+
 @section('content')
+@include('group.creategroup_button', ['user' => $user])
     <div class="user-profile">
         
         <div class="name text-center">
