@@ -35,7 +35,7 @@ class MakegroupController extends Controller
             $friendObj->groups()->attach($group->id);
         }
         
-        return redirect('/');
+       return redirect()->route('friends.index');
         
         // $request->friends;
   

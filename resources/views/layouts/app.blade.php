@@ -57,7 +57,7 @@
                     @if (Auth::check())
                         
                 <a class="navbar-left" href="/user" id="toop">Search </a>
-                <a class="navbar-left" href="/friends" id="toop">Friends </a>
+                <a class="navbar-left" href="/friends" id="toop">Groups/Friends </a>
                 <a class="navbar-left" href="/makegroup" id="toop">Makegroup </a>
                    
                     @else
