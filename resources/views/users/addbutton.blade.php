@@ -5,7 +5,7 @@
         {!! Form::submit('Unfriend', ['class' => "btn btn-danger"]) !!}
     {!! Form::close() !!}
  
- @else
+    @else
  
     {!! Form::open(['route' => ['add.get', $user->id], 'method' => 'get']) !!}
         {!! Form::submit('Add', ['class' => "btn btn-danger btn-xs"]) !!}

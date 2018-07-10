@@ -46,7 +46,7 @@ class Group extends Model
     
     public function groups()
     {
-        return $this->belongsToMany(Micropost::class, 'user_group', 'userId', 'groupIid')->withTimestamps();
+        return $this->belongsToMany(User::class, 'user_group', 'userId', 'groupId')->withTimestamps();
     }
     
     public function group($group_id)
