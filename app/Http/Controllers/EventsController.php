@@ -87,8 +87,7 @@ class EventsController extends Controller
         
         //*-- get events --*//
         $userEvents = Event::all();
-        
-        // var_dump($this->getAvailableDates($schedulingEvent));
+
         var_dump($this->getAvailableDates($userEvents, $schedulingEvents));
     }
 
