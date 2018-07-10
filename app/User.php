@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use App\Event;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -35,6 +37,10 @@ class User extends Authenticatable
     public function friends()
     {
         return $this->belongsToMany(User::class, 'user_friend', 'userId', 'friendId')->withTimestamps();
+    }
+    
+    public function groups(){
+        return $this->belongsToMany(Group::class, 'user_group', 'userId', 'groupId')->withTimestamps();
     }
 
 
