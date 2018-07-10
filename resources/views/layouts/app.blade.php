@@ -75,7 +75,16 @@
                     @else
                         
                     @endif
-     
-             @include('commons.footer')
+                    
+                    
+     @if (Auth::check())
+                        
+                 @include('commons.footer')
+                
+                    @else
+                        
+                    @endif
+      
+           
 </body>
 </html>
