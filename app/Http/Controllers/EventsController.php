@@ -57,6 +57,18 @@ class EventsController extends Controller
         $table->save();
     }
     
+    function getFakeUsersEvents($num){
+        if($num < 0) $num = 1;
+        
+        $users = [];
+        for($i=0; $i<$num; $i++){
+            $tmp = ['userId'=>$i, 'events'=>Event::all()->where('id', 1)];
+            array_push($users, $tmp);
+        }
+        
+        return $users;
+    }
+    
     // can't handle event that goes across with this algorithm
     function scheduleEvents(Request $request){//$req){
         //*-- event you wanna schedule --*//
@@ -85,15 +97,30 @@ class EventsController extends Controller
             array_push($schedulingEvents, $event);
         }
         
-        //*-- get events --*//
-        $userEvents = Event::all();
+        //*-- get events of each users --*//
+        $userEvents = $this->getFakeUsersEvents(5);
 
-        $res = $this->getAvailableDates($userEvents, $schedulingEvents);
+        //*-- get available dates for each users *--//
+        $availableDatesPerUser = [];
+        foreach($userEvents as $userEvent){
+            $res = $this->getAvailableDates($userEvent['events'], $schedulingEvents);
+            array_push($availableDatesPerUser, $res);
+        }
+
         return view('events.result', [
-            'availableDates' => $res,
+            'availableDates' => $availableDatesPerUser,
         ]);
     }
-
+    
+    //compare available dates of each users
+    function compareAvailableDates($availableDatesPerUser, $schedulingEvents){
+        foreach($schedulingEvents as $se){
+            $seFrom = new \DateTime($se->dateFrom . " " . $se->timeFrom);
+            foreach($availableDatesPerUser as $ae){
+                // later...
+            }
+        }
+    }
     
     function getAvailableDates($userEvents, $schedulingEvents){
         // array for available dates
