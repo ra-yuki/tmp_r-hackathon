@@ -7,31 +7,46 @@ use Illuminate\Http\Request;
 class MakegroupController extends Controller
 {
         public function index()
-    {
-      $data = [];
-        if (\Auth::check()) {
-            $user = \Auth::user();
-            $groups = $user->feed_groups()->orderBy('created_at', 'desc');
-
-            $data = [
-                'user' => $user,
-                'groups' => $groups,
-            ];
-        }
-        return view('welcome', $data);
+    { 
+        $friends=\Auth::user()->friends;
+        return view('group.makegroup', [
+            'friends' => $friends
+        ]);
+        
     }
+   
     
         public function store(Request $request)
     {
-        // $this->validate($request, [
-        //   'content' => 'required|max:191',
+        // get user input
+        $friends = $request->friends;
+        $groupName = $request->name;
+        
+        // add new group to groups table
+        $group = new \App\Group();
+        $group->name = $groupName;
+        $group->visibility = true;
+        $group->save();
+        
+        // subscribe users to the group
+        \Auth::user()->groups()->attach($group->id);
+        foreach($friends as $friend){
+            $friendObj = \App\User::find($friend);
+            $friendObj->groups()->attach($group->id);
+        }
+        
+        return redirect('/');
+        
+        // $request->friends;
+  
+        // $friendid=$request->friends;
+        
+        
+        
+        // return view('group.groupname', [
+        //     'friends' => $friends
+            
         // ]);
-
-        $request->user()->groups()->create([
-            'name' => $request->content,
-        ]);
-
-        return redirect()->back();
     }
     
         public function destroy($id)

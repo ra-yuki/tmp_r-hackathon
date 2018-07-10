@@ -58,7 +58,8 @@
                         
                 <a class="navbar-left" href="/user" id="toop">Search </a>
                 <a class="navbar-left" href="/friends" id="toop">Friends </a>
-                
+                <a class="navbar-left" href="/makegroup" id="toop">Makegroup </a>
+                   
                     @else
                         
                     @endif
@@ -75,7 +76,16 @@
                     @else
                         
                     @endif
-     
-             @include('commons.footer')
+                    
+                    
+     @if (Auth::check())
+                        
+                 @include('commons.footer')
+                
+                    @else
+                        
+                    @endif
+      
+           
 </body>
 </html>

@@ -35,8 +35,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('add/{id}', 'AddFriendController@store')->name('add.get');
     Route::delete('unfriend/{id}','AddFriendController@destroy')->name('unfriend');
 });
- 
-
 
 Auth::routes();
 

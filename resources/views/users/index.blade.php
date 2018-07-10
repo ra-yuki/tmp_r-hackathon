@@ -3,7 +3,7 @@
 
 
 @section('content')
-@include('group.creategroup_button', ['user' => $user])
+@include('group.makegroup_button')
     <div class="user-profile">
         
         <div class="name text-center">
