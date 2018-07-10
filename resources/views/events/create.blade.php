@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="col-xs-12">
-                {{Form::open(['route' => 'events.store', 'method' => 'post'])}}
+                {{Form::open(['route' => 'events.scheduleEvents', 'method' => 'post'])}}
                     {{Form::label('title')}}
                     {{Form::text('title')}}
                     {{Form::label('date from')}}

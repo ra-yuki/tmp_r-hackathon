@@ -24,6 +24,7 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('mypage', 'MypageController', ['only' => ['index']]);
     Route::resource('events', 'EventsController', ['except' => ['index']]);
+    Route::post('events/schedule', 'EventsController@scheduleEvents')->name('events.scheduleEvents');
     Route::resource('friends', 'FriendsController', ['only' => ['show','store','delete','index']]);
     // Group表示はフレンドの方に含める
     Route::resource('groups', 'GroupsController', ['only' => ['show','store','delete']]);
