@@ -1,6 +1,39 @@
 @extends('layouts.app')
 
-{{-- ↓↓ 検索フォーム ↓↓ --}}
+@section('content')
+
+
+{{-- display friends and groups --}}
+<div class="container">
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#group">Groups</a></li>
+    <li><a data-toggle="tab" href="#friend">Friends</a></li>
+  </ul>
+
+  <div class="tab-content">
+      <div id="group" class="tab-pane fade in active">
+    <h3>Groups</h3>
+      <?php $groups = \Auth::user()->groups; ?>
+      @foreach ($groups as $group)
+           <div class="col-md-3 col-sm-4 col-xs-12">
+                <div class="panel panel-default">
+                    <div>
+                        {!! link_to_route('groups.show',$group->name, ['id' => $group->id]) !!}<p>{!! nl2br(e($group->name)) !!}</p>{{ $group->created_at }}
+                    </div>
+                    
+            
+                </div>
+            </div>
+    
+@endforeach
+    
+   
+        
+    </div>
+     <div id="friend" class="tab-pane fade ">
+      <h3>Friends</h3>
+      {{-- ↓↓ 検索フォーム ↓↓ --}}
 
 <form class="form-inline" action="{{route('friends.index')}}">
   <div class="form-group">
@@ -10,28 +43,15 @@
 </form>
 
 {{-- ↑↑ 検索フォーム ↑↑ --}}
-
- 
-<ul class="media-list">
-@foreach ($friends as $friend)
-    <?php $user = $friend->user; ?>
-    
-           <div class="col-md-3 col-sm-4 col-xs-12">
-                <div class="panel panel-default">
-                    <div>
-                        {!! link_to_route('friends.show',$friend->name, ['id' => $friend->id]) !!}<p>{!! nl2br(e($friend->name)) !!}</p>{{ $friend->created_at }}
-                    </div>
-                    <div>
-                        @if (Auth::user()->id == $friend->user_id)
-                             
-                            {!! Form::open(['route' => ['friends.destroy', $friend->id], 'method' => 'delete']) !!}
-                                {!! Form::submit('削除', ['class' => 'btn btn-danger btn-xs']) !!}
-                            {!! Form::close() !!}
-                          
-                        @endif
-                    </div>
-            
-                </div>
+        @foreach ($friends as $friend)
+        <div class="col-md-3 col-sm-4 col-xs-12">
+            <div class="panel panel-default">
+                <div>{!! link_to_route('friends.show',$friend->name, ['id' => $friend->id]) !!}<p>{!! nl2br(e($friend->name)) !!}</p>{{ $friend->created_at }}</div>
             </div>
-    
-@endforeach
+        </div>
+        @endforeach
+    </div>
+  </div>
+</div>
+
+@endsection
