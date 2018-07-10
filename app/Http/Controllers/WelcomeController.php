@@ -6,7 +6,12 @@ use Illuminate\Http\Request;
 
 class WelcomeController extends Controller
 {
+  
     function index(){
-        return view('welcome');
+        if (\Auth::check())
+            return view('users.index');
+        
+        else 
+            return view('welcome');
     }
 }
