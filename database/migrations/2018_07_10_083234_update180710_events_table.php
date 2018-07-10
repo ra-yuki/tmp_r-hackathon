@@ -17,6 +17,7 @@ class Update180710EventsTable extends Migration
             // news
             $table->dateTime('dateTimeFromSelf')->nullable();
             $table->dateTime('dateTimeToSelf')->nullable();
+            $table->string('eventPath');
             // changes
             $table->date('dateFrom')->nullable()->change();
             $table->date('dateTo')->nullable()->change();
@@ -40,6 +41,7 @@ class Update180710EventsTable extends Migration
             // news
             $table->dropColumn('dateTimeFromSelf');
             $table->dropColumn('dateTimeToSelf');
+            $table->dropColumn('eventPath');
             // changes
             $table->date('dateFrom')->nullable(false)->change();
             $table->date('dateTo')->nullable(false)->change();

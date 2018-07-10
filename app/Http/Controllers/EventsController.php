@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Event;
 use App\Libraries\Vec2;
+use App\Libraries\OctopathHelper;
 
 ///////////////////////////////////////////////////////////
 //*-- go for it strategy from midnight me;) --*//
@@ -32,13 +33,31 @@ class EventsController extends Controller
         return view('events.create');
     }
     
-    function generateEvents(Request $request){
+    function generateEvent(Request $request){
         $table = new Event();
-        $table->dateFrom = $request->dateFrom;
-        $table->dateTo = $request->dateTo;
-        $table->timeFrom = $request->timeFrom;
-        $table->timeTo = $request->timeTo;
+        // $table->dateFrom = $request->dateFrom;
+        // $table->dateTo = $request->dateTo;
+        // $table->timeFrom = $request->timeFrom;
+        // $table->timeTo = $request->timeTo;
+        // $table->title = $request->title;
+        
+        $table->dateTimeFromSelf = $request->dateFrom + " " + $request->timeFrom;
+        $table->dateTimeToSelf = $request->dateTo + " " + $request->timeTo;
         $table->title = $request->title;
+        $table->fixed = true;
+        $table->eventPath = OctopathHelper::generate_octopath();
+
+        $table->save();
+    }
+    
+    function generateEventFromArg($dateTimeFrom, $dateTimeTo, $title){
+        $table = new Event();
+        
+        $table->dateTimeFromSelf = $dateTimeFrom;
+        $table->dateTimeToSelf = $dateTimeTo;
+        $table->title = $title;
+        $table->fixed = true;
+        $table->eventPath = OctopathHelper::generate_octopath();
 
         $table->save();
     }
