@@ -62,8 +62,8 @@ class EventsController extends Controller
         
         $users = [];
         for($i=0; $i<$num; $i++){
-            $tmp = ['userId'=>$i, 'events'=>Event::all()->where('id', 1)];
-            array_push($users, $tmp);
+            $tmp = Event::all()->where('id', 1);
+            $users[$i+3] = $tmp;
         }
         
         return $users;
@@ -97,29 +97,52 @@ class EventsController extends Controller
             array_push($schedulingEvents, $event);
         }
         
-        //*-- get events of each users --*//
+        //*-- get all the events of each users --*//
         $userEvents = $this->getFakeUsersEvents(5);
 
         //*-- get available dates for each users *--//
         $availableDatesPerUser = [];
-        foreach($userEvents as $userEvent){
-            $res = $this->getAvailableDates($userEvent['events'], $schedulingEvents);
-            array_push($availableDatesPerUser, $res);
+        foreach($userEvents as $key => $userEvent){
+            $res = $this->getAvailableDates($userEvent, $schedulingEvents);
+            $availableDatesPerUser[$key] = $res;
+        }
+        
+        //*-- compare to get the most emptied date(s) --*//
+        $res = $this->compareAvailableDates($availableDatesPerUser, $schedulingEvents);
+        
+        //*-- get the most emptied date(s) --*//
+        $userNum = count($userEvents);
+        for($i=$userNum-1; $i>=0; $i--){
+            foreach($res as $key => $val){
+                // @later...
+            }
         }
 
+        //*-- parse to view --*//
         return view('events.result', [
-            'availableDates' => $availableDatesPerUser,
+            'result' => $res,
         ]);
     }
     
     //compare available dates of each users
     function compareAvailableDates($availableDatesPerUser, $schedulingEvents){
+        $res = [];
+        //iterate events we wanna schedule
         foreach($schedulingEvents as $se){
             $seFrom = new \DateTime($se->dateFrom . " " . $se->timeFrom);
+            //iterate each user
             foreach($availableDatesPerUser as $ae){
-                // later...
+                //iterate available dates the user has
+                foreach($ae as $fromTo){
+                    if($seFrom->getTimestamp() == $fromTo['from']){
+                        $key = $seFrom->format('Y-m-d H:i:s');
+                        $res[$key] = (isset($res[$key])) ? $res[$key]+1 : 0;
+                    }
+                }
             }
         }
+        
+        return $res;
     }
     
     function getAvailableDates($userEvents, $schedulingEvents){
