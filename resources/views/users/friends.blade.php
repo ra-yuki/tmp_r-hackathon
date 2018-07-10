@@ -1,5 +1,16 @@
 @extends('layouts.app')
 
+↓↓ 検索フォーム ↓↓
+
+<form class="form-inline" action="{{route('friends.index')}}">
+  <div class="form-group">
+  <input type="text" name="friendId" value="{{$friendId}}" class="form-control" placeholder="Search Friends">
+  </div>
+  <input type="submit" value="Search" class="bt">
+</form>
+
+↑↑ 検索フォーム ↑↑
+ 
 <ul class="media-list">
 @foreach ($friends as $friend)
     <?php $user = $friend->user; ?>
