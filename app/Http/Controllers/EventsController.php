@@ -35,12 +35,7 @@ class EventsController extends Controller
     
     function generateEvent(Request $request){
         $table = new Event();
-        // $table->dateFrom = $request->dateFrom;
-        // $table->dateTo = $request->dateTo;
-        // $table->timeFrom = $request->timeFrom;
-        // $table->timeTo = $request->timeTo;
-        // $table->title = $request->title;
-        
+
         $table->dateTimeFromSelf = $request->dateFrom + " " + $request->timeFrom;
         $table->dateTimeToSelf = $request->dateTo + " " + $request->timeTo;
         $table->title = $request->title;
@@ -94,7 +89,12 @@ class EventsController extends Controller
         $userEvents = Event::all();
         
         // var_dump($this->getAvailableDates($schedulingEvent));
-        var_dump($this->getAvailableDates($userEvents, $schedulingEvents));
+        // var_dump($this->getAvailableDates($userEvents, $schedulingEvents));
+        $availableDates = $this->getAvailableDates($userEvents, $schedulingEvents);
+        
+        return view('events.result', [
+            'availableDates' => $availableDates,
+        ]);
     }
 
     
@@ -109,10 +109,10 @@ class EventsController extends Controller
             $sEventToTimestamp = (new \DateTime($sEvent->dateTo . " " . $sEvent->timeTo))->getTimestamp();
             foreach($userEvents as $uEvent){
                 // get timestamped uEvent
-                $uEventFromTimestamp = (new \DateTime($uEvent->dateFrom . " " . $uEvent->timeFrom))->getTimestamp();
-                $uEventToTimestamp = (new \DateTime($uEvent->dateTo . " " . $uEvent->timeTo))->getTimestamp();
+                $uEventFromTimestamp = (new \DateTime($uEvent->dateTimeFromSelf))->getTimestamp();
+                $uEventToTimestamp = (new \DateTime($uEvent->dateTimeToSelf))->getTimestamp();
                 // detect collisions
-                $res = $this->CollideLines(new Vec2($sEventFromTimestamp, $sEventToTimestamp), new Vec2($uEventFromTimestamp, $uEventToTimestamp));
+                $res = $this->collideLines(new Vec2($sEventFromTimestamp, $sEventToTimestamp), new Vec2($uEventFromTimestamp, $uEventToTimestamp));
                 if($res){ $collided = true; break; }
             }
             
@@ -125,7 +125,7 @@ class EventsController extends Controller
         return $availableDates;
     }
     
-    function CollideLines(Vec2 $line, Vec2 $line2){
+    function collideLines(Vec2 $line, Vec2 $line2){
         $cond = $line->x < $line2->y;
         $cond2 = $line->y > $line2->x;
         if($cond && $cond2){
