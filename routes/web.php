@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('events', 'EventsController', ['except' => ['index']]);
     Route::post('events/schedule', 'EventsController@scheduleEvents')->name('events.scheduleEvents');
     Route::resource('friends', 'FriendsController', ['only' => ['show','store','delete','index']]);
+    Route::get('search', 'SearchController@index')->name('friends.search');
     // Group表示はフレンドの方に含める
     Route::resource('groups', 'GroupsController', ['only' => ['show','store','delete']]);
     // 友達検索機能のコントローラ

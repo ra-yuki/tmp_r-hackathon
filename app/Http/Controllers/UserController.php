@@ -16,7 +16,10 @@ public function index(Request $request)
   if(!empty($keyword))
   {
     $res = \App\User::where('name', 'like', "%$keyword%")->get();
-  }
+  }       
+  else{
+            $res = \Auth::user()->get();
+      }
  return view('users.user', [
      'userId' => $keyword, 
      'SearchResult' => $res,
