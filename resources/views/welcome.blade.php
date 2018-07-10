@@ -36,6 +36,28 @@
       
         
     </div>
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <div class="carousel-indicators">
+    <div data-target="#carouselExampleIndicators" data-slide-to="0" class="active">Calendar</div> 
+    <div data-target="#carouselExampleIndicators" data-slide-to="1">Share</div>
+    <div data-target="#carouselExampleIndicators" data-slide-to="2">Memo</div>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+       　<p>hello</p>
+       　<img src="{{secure_asset('images/ariel.png')}}" alt="m">
+    </div>
+    <div class="carousel-item">
+　　　<p>hey</p>
+　　　<img src="{{secure_asset('images/ariel.png')}}" alt="m">
+    </div>
+    <div class="carousel-item">
+     　<p>hi</p>
+     　<img src="{{secure_asset('images/ariel.png')}}" alt="m">
+    </div>
+  </div>
+ 
+
 
   @include('commons.footer')
 
