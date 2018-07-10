@@ -88,7 +88,10 @@ class EventsController extends Controller
         //*-- get events --*//
         $userEvents = Event::all();
 
-        var_dump($this->getAvailableDates($userEvents, $schedulingEvents));
+        $res = $this->getAvailableDates($userEvents, $schedulingEvents);
+        return view('events.result', [
+            'availableDates' => $res,
+        ]);
     }
 
     
@@ -112,11 +115,13 @@ class EventsController extends Controller
             
             // if not collided, schedulable!
             if(!$collided){
-                array_push($availableDates, $sEvent);
+                $from = (new \DateTime($sEvent->dateFrom . " " . $sEvent->timeFrom))->getTimestamp();
+                $to = (new \DateTime($sEvent->dateTo . " " . $sEvent->timeTo))->getTimestamp();
+                array_push($availableDates, ['from'=>$from, 'to'=>$to]);
             }
         }
         
-        return $availableDates;
+        return $availableDates; //return as timestamped form
     }
     
     function collideLines(Vec2 $line, Vec2 $line2){
